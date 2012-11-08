@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003235436) do
+ActiveRecord::Schema.define(:version => 20121108005344) do
+
+  create_table "audits", :force => true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.text     "audited_changes"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
   create_table "comments", :force => true do |t|
     t.string   "author"
@@ -23,12 +31,23 @@ ActiveRecord::Schema.define(:version => 20121003235436) do
 
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
+  create_table "employees", :force => true do |t|
+    t.string   "name"
+    t.integer  "manager_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "body"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "author"
+    t.string   "type"
+    t.string   "photo_url"
+    t.text     "quote_body"
+    t.string   "quote_source"
   end
 
 end
